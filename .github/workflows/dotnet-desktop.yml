@@ -59,7 +59,7 @@ jobs:
 
     - name: List files in dir
       run: |
-        ls D:\SimHub
+        ls "C:\Program Files (x86)\SimHub\"
         
     - name: List files in dir 2
       run: |
