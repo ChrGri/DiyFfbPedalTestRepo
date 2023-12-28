@@ -78,7 +78,7 @@ jobs:
     - name: Upload Artifact
       uses: ncipollo/release-action@v1
       with:
-        artifacts: 'D:\a\DiyFfbPedalTestRepo\DiyFfbPedalTestRepo\SimHubPlugin\obj\Release\DiyActivePedal.dll'
+        artifacts: 'D:\a\DiyFfbPedalTestRepo\DiyFfbPedalTestRepo\SimHubPlugin\bin\DiyActivePedal.dll'
         prerelease: ${{ github.event.inputs.is-pre-release }}
         replacesArtifacts: true
         allowUpdates: true
