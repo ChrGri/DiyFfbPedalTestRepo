@@ -60,6 +60,10 @@ jobs:
     - name: List files in dir
       run: |
         ls D:\SimHub
+        
+    - name: List files in dir 2
+      run: |
+        ls ${{ github.workspace }}
           
     - name: Restore Packages
       run: nuget restore "SimHubPlugin/User.PluginSdkDemo.sln"
