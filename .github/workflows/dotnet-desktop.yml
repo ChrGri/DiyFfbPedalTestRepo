@@ -54,8 +54,8 @@ jobs:
         7z x innounp050.rar
         7z x SimHub.8.01.2.zip
         dir
-        mkdir D:\SimHub
-        D:\a\DiyFfbPedalTestRepo\DiyFfbPedalTestRepo\innounp.exe -v -x -b -e -d"D:\SimHub" SimHubSetup_8.1.2.exe GameReaderCommon.dll SimHub.plugins.dll
+        mkdir "C:\Program Files (x86)\SimHub\"
+        D:\a\DiyFfbPedalTestRepo\DiyFfbPedalTestRepo\innounp.exe -v -x -b -e -d"C:\Program Files (x86)\SimHub\" SimHubSetup_8.1.2.exe GameReaderCommon.dll SimHub.plugins.dll
 
     - name: List files in dir
       run: |
