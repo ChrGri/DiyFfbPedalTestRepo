@@ -71,16 +71,21 @@ jobs:
     - name: Build solution
       run: msbuild "SimHubPlugin/User.PluginSdkDemo.sln" -t:rebuild -property:Configuration=Release
 
-    - name: List files in dir 3
-      run: |
-        ls ${{ github.workspace }}/SimHubPlugin
+    
 
 
     # zip plugin binaries
-    - uses: montudor/action-zip@v1
-      with:
-        args: zip -qq -r ./SimHubPlugin/bin/SimHub_plugin.zip ./SimHubPlugin/bin/
+    - name: ZIP files
+      run: | 
+        7z a ./SimHubPlugin/bin/SimHub_plugin.zip ./SimHubPlugin/bin/*
 
+
+    - name: List files in dir 3
+      run: |
+        ls ${{ github.workspace }}/SimHubPlugin
+    - name: List files in dir 4
+      run: |
+        ls ${{ github.workspace }}/SimHubPlugin/bin
         
     # create a release
     # see https://www.youtube.com/watch?v=_ueJ3LrRqPU
