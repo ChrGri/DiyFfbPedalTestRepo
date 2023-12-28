@@ -61,9 +61,9 @@ jobs:
       run: |
         ls "C:\Program Files (x86)\SimHub\"
         
-    - name: List files in dir 2
-      run: |
-        ls ${{ github.workspace }}
+    #- name: List files in dir 2
+    #  run: |
+    #    ls ${{ github.workspace }}
           
     - name: Restore Packages
       run: nuget restore "SimHubPlugin/User.PluginSdkDemo.sln"
@@ -74,42 +74,42 @@ jobs:
     
 
 
-    # zip plugin binaries
-    - name: ZIP files
-      run: | 
-        7z a ./SimHubPlugin/bin/SimHub_plugin.zip ./SimHubPlugin/bin/*
+    ## zip plugin binaries
+    #- name: ZIP files
+    #  run: | 
+    #    7z a ./SimHubPlugin/bin/SimHub_plugin.zip ./SimHubPlugin/bin/*
 
 
-    - name: List files in dir 3
-      run: |
-        ls ${{ github.workspace }}/SimHubPlugin
-    - name: List files in dir 4
-      run: |
-        ls ${{ github.workspace }}/SimHubPlugin/bin
+    #- name: List files in dir 3
+    #  run: |
+    #    ls ${{ github.workspace }}/SimHubPlugin
+    #- name: List files in dir 4
+    #  run: |
+    #    ls ${{ github.workspace }}/SimHubPlugin/bin
         
     # create a release
     # see https://www.youtube.com/watch?v=_ueJ3LrRqPU
-    - name: Create Release
-      id: create-new-release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.run_number }}
-        release_name: Release ${{ github.run_number }}
+    #- name: Create Release
+    #  id: create-new-release
+    #  uses: actions/create-release@v1
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  with:
+    #    tag_name: ${{ github.run_number }}
+    #    release_name: Release ${{ github.run_number }}
 
         
-     # SimHub plugin binaries
-    - name: Upload SimHub release assets
-      id: upload-release-asset-plugin 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create-new-release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./SimHubPlugin/bin/SimHub_plugin.zip
-        asset_name: SimHub_plugin.zip
-        asset_content_type: application/zip 
+    # # SimHub plugin binaries
+    #- name: Upload SimHub release assets
+    #  id: upload-release-asset-plugin 
+    #  uses: actions/upload-release-asset@v1
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  with:
+    #    upload_url: ${{ steps.create-new-release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+    #    asset_path: ./SimHubPlugin/bin/SimHub_plugin.zip
+    #    asset_name: SimHub_plugin.zip
+    #    asset_content_type: application/zip 
 
 
 
