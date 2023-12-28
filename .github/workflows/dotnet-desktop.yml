@@ -71,6 +71,10 @@ jobs:
     - name: Build solution
       run: msbuild "SimHubPlugin/User.PluginSdkDemo.sln" -t:rebuild -property:Configuration=Release
 
+    - name: List files in dir 3
+      run: |
+        ls ${{ github.workspace }}/SimHubPlugin
+        
     - name: Upload Artifact
       uses: ncipollo/release-action@v1
       with:
