@@ -57,6 +57,10 @@ jobs:
         mkdir D:\SimHub
         D:\a\DiyFfbPedalTestRepo\DiyFfbPedalTestRepo\innounp.exe -v -x -b -e -d"D:\SimHub" SimHubSetup_8.1.2.exe GameReaderCommon.dll SimHub.plugins.dll
 
+    - name: List files in dir
+      run: |
+        ls D:\SimHub
+          
     - name: Restore Packages
       run: nuget restore "SimHubPlugin/User.PluginSdkDemo.sln"
 
