@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:User.PluginSdkDemo"
              xmlns:styles="clr-namespace:SimHub.Plugins.Styles;assembly=SimHub.Plugins" mc:Ignorable="d" 
-             xmlns:ui="clr-namespace:SimHub.Plugins.UI;assembly=SimHub.Plugins" Height="1016" Width="1296">
+             xmlns:ui="clr-namespace:SimHub.Plugins.UI;assembly=SimHub.Plugins" Height="1280" Width="1600">
 
 
 
@@ -13,36 +13,35 @@
 
 
     <!-- Define the GUI interface, common for all pedals -->
-    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Auto">
-        <Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
+        <Grid RenderTransformOrigin="0.497,0.499">
 
             <!-- Define the GUI grid -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="46"/>
+                <RowDefinition Height="277"/>
+                <RowDefinition Height="155"/>
+                <RowDefinition Height="205"/>
+                <RowDefinition Height="165"/>
+                <RowDefinition Height="165"/>
                 <RowDefinition Height="300"/>
-                <RowDefinition Height="46"/>
-                <RowDefinition Height="200"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="300"/>
+
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
-                <ColumnDefinition Width="500"/>
-                <ColumnDefinition Width="900"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition Width="740"/>
 
+            </Grid.ColumnDefinitions>
+            <!-- -->
             <!-- Define the tabs to select the pedal -->
-            <TabControl x:Name="MyTab" SelectionChanged="TabControl_SelectionChanged">
-                <TabItem x:Name="tabPedalSelection_clutch" Header="Clutch"/>
-                <TabItem x:Name="tabPedalSelection_brake" Header="Brake"/>
-                <TabItem x:Name="tabPedalSelection_accelerator" Header="Accelerator"/>
+            <TabControl  x:Name="MyTab" SelectionChanged="TabControl_SelectionChanged" Width="400" Grid.ColumnSpan="2" HorizontalContentAlignment="Left" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TabItem x:Name="tabPedalSelection_clutch" Header="Clutch" FontFamily="Yu Gothic UI Semibold" Height="39" HorizontalAlignment="Left" Width="90" />
+                <TabItem x:Name="tabPedalSelection_brake" Header="Brake" FontFamily="Yu Gothic UI Semibold"/>
+                <TabItem x:Name="tabPedalSelection_accelerator" Header="Accelerator" FontFamily="Yu Gothic UI Semibold"/>
             </TabControl>
 
 
@@ -50,29 +49,15 @@
             <!-- serial port selection -->
             <TextBlock Text="Serial port selection:" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="500,0,0,0"  Grid.Row="1" Grid.Column="0" Width="180" />
 
-            <ComboBox x:Name="SerialPortSelection" SelectionChanged="SerialPortSelectionChanged" Margin="171,0,0,0"  Grid.Row="1" Grid.Column="0"
-      Width="115" HorizontalAlignment="Left"
-      ItemsSource="{Binding}" DisplayMemberPath="Display" SelectedValuePath="Value" FontSize="10"/>
-
-            <styles:SHButtonPrimary x:Name="btn_update" Click="UpdateSerialPortList_click" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Width="160" >Update serial port list</styles:SHButtonPrimary>
-
             <!-- serial connection -->
-            <styles:SHButtonSecondary Click="ConnectToPedal_click" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Width="115" Margin="171,4,0,14" FontSize="8" Background="#FF08FF00" >Connect to Pedal</styles:SHButtonSecondary>
             <!--<TextBlock Text="Connect to pedal:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,10,0,0"  Grid.Row="2" Width="200" Foreground="Red" />-->
-            <CheckBox x:Name="ConnectToPedal" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="1"
-      Width="64"
-      Height="26" Margin="288,0,0,0" VerticalAlignment="Center" IsChecked="False" IsEnabled="False" Content="Connected" FontSize="8"/>
 
 
 
             <!-- send config buttons -->
-            <styles:SHButtonPrimary Click="ResetPedalPosition_click" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Width="160" >Reset pedal position</styles:SHButtonPrimary>
-            <styles:SHButtonPrimary Click="SendConfigToPedal_click" HorizontalAlignment="Left" Grid.Row="3"  Grid.Column="0" Width="160" >Send config to pedal</styles:SHButtonPrimary>
-            <styles:SHButtonPrimary Click="ReadConfigFromPedal_click" HorizontalAlignment="Left" Grid.Row="4"  Grid.Column="0" Width="160" >Read config from pedal</styles:SHButtonPrimary>
 
             <!-- read/write config from/to JSON file buttons -->
             <!--<styles:SHButtonPrimary Click="SaveStructToJson_click" HorizontalAlignment="Left" Grid.Row="4"  Grid.Column="1" Width="180" >Save config to JSON</styles:SHButtonPrimary>-->
-            <styles:SHButtonPrimary Click="OpenButton_Click" HorizontalAlignment="Left" Grid.Row="6" Width="100" Margin="5,5,0,77" Content="Open config" />
             <!--<styles:SHButtonPrimary Click="ReadStructFromJson_click" HorizontalAlignment="Right" Grid.Row="4"  Grid.Column="1" Width="180" >Read config from JSON</styles:SHButtonPrimary>-->
 
 
@@ -91,15 +76,15 @@
             <!-- Serial communication debug textbox -->
             <TextBlock x:Name="text_serial" HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
-            Margin="5,0,0,0" 
+            Margin="5,79,0,0" 
             Text="Serial monitor:" 
-            Grid.Row="3" 
+            Grid.Row="1" 
             Grid.Column="2" 
             Width="160" 
             Foreground="White"/>
-            <TextBox x:Name="TextBox_serialMonitor" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" Margin="0,20,0,0" Grid.Column="2" Grid.Row="3" Grid.RowSpan="9" Grid.ColumnSpan="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="700" Height="500" AutomationProperties.Name="TextBox3" Background="#7F252525" BorderBrush="#00CCCCCC" />
+            <TextBox x:Name="TextBox_serialMonitor" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible" HorizontalAlignment="Left" Margin="0,100,0,0" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="700" Height="500" AutomationProperties.Name="TextBox3" Background="#7F252525" BorderBrush="#00CCCCCC" />
 
-            <styles:SHButtonPrimary x:Name="btn_serial" Click="SerialMonitorRead_click" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="2" Width="102" Margin="88,42,0,27" FontSize="6" Grid.RowSpan="2" >Serial monitor update</styles:SHButtonPrimary>
+            <!--<styles:SHButtonPrimary x:Name="btn_serial" Click="SerialMonitorRead_click" HorizontalAlignment="Left" Grid.Row="2"  Grid.Column="2" Width="102" Margin="88,42,0,27" FontSize="6" Grid.RowSpan="2" >Serial monitor update</styles:SHButtonPrimary>-->
 
 
 
@@ -128,220 +113,21 @@
 
             <!-- Pedal ABS test signal checkbox -->
             <!--<TextBlock HorizontalAlignment="Right" VerticalAlignment="Top" Margin="5,0,0,0" Text="ABS test signal" Grid.Row="6" Grid.Column="0" Width="120" />-->
-            <CheckBox x:Name="TestAbs" Grid.Column="0" HorizontalAlignment="Left" Grid.Row="3"
-                  Width="103"
-                  Height="34" Margin="245,16,0,0" VerticalAlignment="Top" IsEnabled="False" Content="ABS/TC-Signal Active" Foreground="White" FontSize="8" Grid.RowSpan="2"/>
 
 
             <!-- Pedal dampening slider -->
 
 
             <!-- Travel vs Force curve GUI elements -->
-            <Canvas x:Name="canvas" Height="200" Width="400" Background="#7F333333" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="390,37,0,0" Grid.RowSpan="6" Grid.ColumnSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-
-
-
-                <TextBlock HorizontalAlignment="Center" 
-                   VerticalAlignment="Top" 
-                   Text="Force ->" 
-                   Width="60" 
-                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="-40" Canvas.Top="110" FontFamily="Arial">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-90"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
-
-                <TextBlock HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Text="Travel ->" 
-                   Width="60" 
-                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="160" Canvas.Top="200" FontFamily="Arial">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
-                <TextBlock x:Name="text_SABS" HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" 
-                    Text="Simulated ABS" 
-                    Width="120" 
-                    Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="320" Canvas.Top="80.2" FontSize="8" Height="20">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
-                <TextBlock x:Name="text_point_pos" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Text="pos" 
-                   Width="60" 
-                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="5" Canvas.Top="5" Height="28" FontSize="10" FontFamily="Arial">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
-                <Polyline x:Name="Polyline_BrakeForceCurve"
-                      Height="300" Width="400"
-                    Points="0,0 80,20 160,40 240,60 320,80 400,100"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="4" RenderTransformOrigin="1,0.5" Canvas.Top="-100" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                    <Polyline.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform ScaleX="1" ScaleY="-1"/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform X="0"/>
-                        </TransformGroup>
-                    </Polyline.RenderTransform>
-                </Polyline>
-                <Rectangle x:Name="rect_SABS" Width="80" Height="200" Fill="#4C8B0000" Canvas.Left="320" Canvas.Top="0" />
-                <Rectangle x:Name="rect_SABS_Control" Width="6" Height="200" Fill="#998B0000" Canvas.Left="317" Canvas.Top="0" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_ABS" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect0" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="-5" Canvas.Top="195" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect1" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="75" Canvas.Top="155" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect2" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="155" Canvas.Top="115" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect3" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="235" Canvas.Top="75" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect4" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="315" Canvas.Top="35" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect5" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="395" Canvas.Top="-5" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-
-            </Canvas>
 
 
 
 
 
             <!-- Travel vs Force curve adjustment sliders -->
-            <TextBlock HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="385,9,0,0" 
-                   Text="Force curve adjustment:" 
-                   Grid.Row="1" 
-                   Width="160" 
-                   Foreground="White" Grid.ColumnSpan="2" FontFamily="Arial"/>
 
 
             <!-- PID sliders -->
-
-            <TextBlock x:Name="text_debug_PID_para" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="0,113,0,0" 
-                   Text="PID parameters:" 
-                   Grid.Row="9" 
-                   Grid.Column="0" 
-                   Width="120" 
-                   Foreground="White"/>
-
-
-            <TextBlock x:Name="text_debug_pgain" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="5,133,0,0" 
-                   Text="P-gain:" 
-                   Grid.Row="9" 
-                   Grid.Column="0" 
-                   Width="120" 
-                   Foreground="White"/>
-            <Slider x:Name="PID_tuning_P_gain_slider" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Top" 
-            Margin="0,133,0,0" 
-            Grid.Row="9" 
-            Width="300" 
-            ValueChanged="PID_tuning_P_gain_changed" 
-            AutoToolTipPlacement="TopLeft" 
-            AutoToolTipPrecision="2"
-            Minimum="0"
-			Maximum="20"
-            TickPlacement="BottomRight"
-			TickFrequency="0.1" RenderTransformOrigin="0.508,0.525"
-            Value="0.3"
-            IsSnapToTickEnabled="False" 
-            SmallChange="0.05"
-            />
-
-            <TextBlock x:Name="text_debug_igain" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="5,173,0,0" 
-                   Text="I-gain:" 
-                   Grid.Row="9" 
-                   Grid.Column="0" 
-                   Width="120" 
-                   Foreground="White"/>
-            <Slider x:Name="PID_tuning_I_gain_slider" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Top" 
-            Margin="0,173,0,0" 
-            Grid.Row="9" 
-            Width="300" 
-            ValueChanged="PID_tuning_I_gain_changed" 
-            AutoToolTipPlacement="TopLeft" 
-            AutoToolTipPrecision="2"
-            Minimum="0"
-			Maximum="500"
-            TickPlacement="BottomRight"
-			TickFrequency="5" RenderTransformOrigin="0.508,0.525"
-            Value="50"
-            IsSnapToTickEnabled="False"
-            />
-
-            <TextBlock x:Name="text_debug_dgain" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="5,213,0,0" 
-                   Text="D-gain:" 
-                   Grid.Row="9" 
-                   Grid.Column="0" 
-                   Width="120" 
-                   Foreground="White"/>
-            <Slider x:Name="PID_tuning_D_gain_slider" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Top" 
-            Margin="0,213,0,0" 
-            Grid.Row="9" 
-            Width="300" 
-            ValueChanged="PID_tuning_D_gain_changed" 
-            AutoToolTipPlacement="TopLeft" 
-            AutoToolTipPrecision="3"
-            Minimum="0"
-			Maximum="0.1"
-            TickPlacement="BottomRight"
-			TickFrequency="5" RenderTransformOrigin="0.508,0.525"
-            Value="0"
-            IsSnapToTickEnabled="False"
-            />
-
-
-
-            <styles:SHButtonPrimary x:Name="btn_system_id" Click="StartSystemIdentification_click" HorizontalAlignment="Left" Grid.Row="9" Width="180" Margin="-6,67,0,196" >System identification</styles:SHButtonPrimary>
 
 
 
@@ -351,16 +137,6 @@
             <TextBlock HorizontalAlignment="Left" 
                    VerticalAlignment="Top" 
                    Margin="5,0,0,0" 
-                   Grid.Row="9" 
-                   Grid.Column="0" 
-                   Width="120" 
-                   Foreground="White"/>
-
-
-            <TextBlock x:Name="text_debug_flag" HorizontalAlignment="Left" 
-                   VerticalAlignment="Top" 
-                   Margin="5,3,0,0" 
-                   Text="Debug flags 0:" 
                    Grid.Row="9" 
                    Grid.Column="0" 
                    Width="120" 
@@ -381,346 +157,920 @@
             <ComboBoxItem>DiyPedalConfig_accelerator_2</ComboBoxItem>
             <ComboBoxItem>DiyPedalConfig_accelerator_3</ComboBoxItem>
         </ComboBox>-->
-            <styles:SHButtonPrimary Click="SaveButton_Click" HorizontalAlignment="Left" Grid.Row="6" Width="100" Margin="109,5,0,77" Content="Save config" />
-            <TextBox x:Name="TextBox2" HorizontalAlignment="Left" Margin="5,0,0,0" Grid.Row="5" TextWrapping="Wrap" VerticalAlignment="Center" Width="204" AutomationProperties.Name="TextBox2" Height="46" FontSize="10" Background="#FF252525" BorderBrush="#00CCCCCC" IsHitTestVisible="False" AllowDrop="True"/>
-            <Button Content="Test-ABS/TC" Margin="172,20,0,0" Grid.Row="3" VerticalAlignment="Top" Click="TestAbs_click" Height="20" Background="#FF050550" HorizontalAlignment="Left" FontWeight="Bold" FontSize="9"/>
-            <styles:SHButtonSecondary Click="DisconnectToPedal_click" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Width="115" Margin="171,35,0,29" FontSize="8" Background="Red" Content="Disconnect from Pedal" Grid.RowSpan="2" />
-            <Slider x:Name="debugFlagSlider_0" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="0,29,0,0" 
-                Grid.Row="9" 
-                Grid.Column="0" 
-                Width="320" 
-                ValueChanged="debugFlagSlider_0_changed" 
-                AutoToolTipPlacement="TopLeft" 
-                AutoToolTipPrecision="0"
-                Minimum="0"
-                Maximum="255"
-                TickPlacement="BottomRight"
-                TickFrequency="16" RenderTransformOrigin="0.508,0.525"
-                Value="0"
-                IsSnapToTickEnabled="False"
-            />
-            <CheckBox x:Name="Simulate_ABS_check" HorizontalAlignment="Left" Grid.Row="6"
-                Width="236"
-                Height="34" VerticalAlignment="Center" Content="Simulate ABS for non-supported game" Foreground="White" Margin="4,0,0,0" Checked="Simulate_ABS_check_Checked" Unchecked="Simulate_ABS_check_Unchecked" IsChecked="False" FontSize="10"/>
-            <Canvas x:Name="canvas_horz_slider" Height="40" Width="410" Background="#00333333" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="385,20,0,0" Grid.ColumnSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
+            <Border BorderThickness="1" Grid.Column="2" HorizontalAlignment="Left" Height="120" Margin="10,237,0,0" Grid.Row="6" VerticalAlignment="Top" Width="500" Background="#7F4E4E4E" CornerRadius="5,5,5,5" Grid.RowSpan="2"/>
+            <Border BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="272" VerticalAlignment="Top" Width="540" Background="#7F4E4E4E" CornerRadius="5,5,5,5" Grid.RowSpan="7" Grid.ColumnSpan="2" Grid.Row="1">
+                <StackPanel HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="600">
+                    <!-- Travel vs Force curve adjustment sliders -->
+                    <TextBlock 
+                   Text="FORCE CURVE ADJUSTMENT" 
+                   Width="200" 
+                   Foreground="White" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="70,5,0,0" Height="15" VerticalAlignment="Center"/>
+                    <StackPanel Height="200" Width="540" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <!-- Travel vs Force curve GUI elements -->
+                        <Canvas x:Name="canvas" Height="200" Width="400" Background="#7F20232F" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="70,0,0,0" >
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
 
-                </Canvas.RenderTransform>
+                            </Canvas.RenderTransform>
 
 
-                <TextBlock x:Name="text_min_pos" HorizontalAlignment="Left" 
+
+                            <TextBlock HorizontalAlignment="Center" 
+                   VerticalAlignment="Top" 
+                   Text="FORCE" 
+                   Width="60" 
+                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="-35" Canvas.Top="85" FontFamily="Arial Black">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+
+                            <TextBlock HorizontalAlignment="Center" 
+                   VerticalAlignment="Center" 
+                   Text="TRAVEL" 
+                   Width="60" 
+                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="170" Canvas.Top="200" FontFamily="Arial Black" TextAlignment="Center">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+
+
+                            <TextBlock x:Name="text_point_pos" HorizontalAlignment="Left" 
+                   VerticalAlignment="Top" 
+                   Text="pos" 
+                   Width="60" 
+                   Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="5" Canvas.Top="5" Height="28" FontSize="10" FontFamily="Arial">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+                            <Polyline x:Name="Polyline_BrakeForceCurve"
+                      Height="300" Width="400"
+                    Points="0,0 80,20 160,40 240,60 320,80 400,100"
+                    Stroke="#7F87CEFA"
+                    StrokeThickness="4" RenderTransformOrigin="1,0.5" Canvas.Top="-100" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                                <Polyline.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="-1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform X="0"/>
+                                    </TransformGroup>
+                                </Polyline.RenderTransform>
+                            </Polyline>
+                            <TextBlock x:Name="text_SABS" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Text="Simulated ABS" 
+                    Width="120" 
+                    Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="320" Canvas.Top="80.2" FontSize="8" Height="10">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <Rectangle x:Name="rect_SABS" Width="400" Height="40" Fill="#4C8B0000" Canvas.Left="0" Canvas.Top="0" />
+                            <Rectangle x:Name="rect_SABS_Control" Width="400" Height="6" Fill="#998B0000" Canvas.Left="0" Canvas.Top="37" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_ABS" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect_BP_Control" Width="32" Height="200" Fill="#990954CE" Canvas.Left="200" Canvas.Top="0" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect_State" Width="10" Height="10" Canvas.Left="25" Canvas.Top="76" Opacity="0.5" Fill="#FFEF0707" />
+                            <TextBlock x:Name="text_state" Width="20" Height="10" Foreground="#7FFFFFFF" Text="10%" FontSize="8" FontFamily="Arial"/>
+                            <Rectangle x:Name="rect0" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="-5" Canvas.Top="195" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect1" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="75" Canvas.Top="155" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect2" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="155" Canvas.Top="115" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect3" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="235" Canvas.Top="75" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect4" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="315" Canvas.Top="35" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect5" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="395" Canvas.Top="-5" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <TextBlock x:Name="text_BP" 
+                                Text="BitePoint:" 
+                                Width="120" 
+                                Foreground="White" RenderTransformOrigin="0.5,0.5" Canvas.Left="235" Canvas.Top="187" FontSize="8" Height="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+
+                        </Canvas>
+                        <Canvas x:Name="canvas_vert_slider" Height="200" Width="20                     " Background="#00333333" RenderTransformOrigin="0.5,0.5" Margin="2,0,0,0" >
+                            <Canvas.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+
+                            </Canvas.RenderTransform>
+
+
+                            <TextBlock x:Name="text_min_force" HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Text="Preload:" 
+                    Width="45" 
+                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="95" FontSize="8" FontFamily="Arial Black" Canvas.Left="28" Height="20">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                            <TextBlock x:Name="text_max_force" HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    Text="Max Force:" 
+                    Width="50" 
+                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="12" FontSize="8" FontFamily="Arial Black" Canvas.Left="28" Height="20">
+                                <TextBlock.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="0"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+
+
+
+                            <Line x:Name="Line_V_force"
+                    X1="9" Y1="0"
+                    X2="9" Y2="200"
+                    Stroke="#7E87CEFA"
+                    StrokeThickness="2" HorizontalAlignment="Left" Canvas.Left="0" VerticalAlignment="Center" />
+
+                            <Rectangle x:Name="rect8" Width="12" Height="6" Fill="LightSkyBlue" Canvas.Left="11" Canvas.Top="98" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_V" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                            <Rectangle x:Name="rect9" Width="12" Height="6" Fill="LightSkyBlue" Canvas.Left="11" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_V" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+
+                        </Canvas>
+                    </StackPanel>
+                    <Canvas x:Name="canvas_horz_slider" Height="40" Width="410" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,6.8,0,0" >
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+
+                        </Canvas.RenderTransform>
+
+
+                        <TextBlock x:Name="text_min_pos" HorizontalAlignment="Left" 
                     VerticalAlignment="Center" 
                     Text="Pedal min" 
                     Width="60" 
                     Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="-25">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-                <TextBlock x:Name="text_max_pos" HorizontalAlignment="Left" 
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="text_max_pos" HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
                     Text="Pedal max" 
                     Width="60" 
                     Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="27" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="375">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="text_position" HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Text="Pedal Range" 
+                    Width="60" 
+                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="170" Height="10">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="0"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
 
 
 
-                <Line x:Name="Line_H_pos"
+                        <Line x:Name="Line_H_pos"
                 X1="5" Y1="20"
                 X2="405" Y2="20"
                 Stroke="#7F87CEFA"
                 StrokeThickness="2" />
 
-                <Rectangle x:Name="rect6" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="0" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect7" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="400" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                        <Rectangle x:Name="rect6" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="0" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                        <Rectangle x:Name="rect7" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="400" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
 
-            </Canvas>
-            <Canvas x:Name="canvas_vert_slider" Height="200" Width="40
-                    " Background="#00333333" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="404,37,0,0" Grid.Column="1" Grid.RowSpan="6" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-
-
-                <TextBlock x:Name="text_min_force" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Text="Preload:" 
-                    Width="90" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="95" FontSize="8" FontFamily="Arial Black" Canvas.Left="28">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-                <TextBlock x:Name="text_max_force" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Text="Max Force:" 
-                    Width="90" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="12" FontSize="8" FontFamily="Arial Black" Canvas.Left="28">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
-
-
-                <Line x:Name="Line_V_force"
-                    X1="20" Y1="0"
-                    X2="20" Y2="200"
-                    Stroke="#7E87CEFA"
-                    StrokeThickness="2" HorizontalAlignment="Left" Canvas.Left="-1" VerticalAlignment="Center" />
-
-                <Rectangle x:Name="rect8" Width="12" Height="6" Fill="LightSkyBlue" Canvas.Left="11" Canvas.Top="98" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_V" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-                <Rectangle x:Name="rect9" Width="12" Height="6" Fill="LightSkyBlue" Canvas.Left="11" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_V" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-            <CheckBox x:Name="Debug_check" HorizontalAlignment="Left" Grid.Row="7"
+                    </Canvas>
+                </StackPanel>
+            </Border>
+            <StackPanel HorizontalAlignment="Left" Height="600" Grid.Row="1" VerticalAlignment="Top" Width="250" Grid.RowSpan="8" Margin="5,0,0,0">
+                <StackPanel Height="80" Width="240" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Label x:Name="info_label" Content="" Height="80" Width="120" FontFamily="Segoe UI"/>
+                    <Label x:Name="info_label_2" Content="Label" Height="80" Width="110" FontFamily="Segoe UI Light"/>
+                </StackPanel>
+                <StackPanel Height="30" Width="250" Orientation="Horizontal">
+                    <ComboBox x:Name="SerialPortSelection" SelectionChanged="SerialPortSelectionChanged"
+      Width="135"
+      ItemsSource="{Binding}" DisplayMemberPath="Display" SelectedValuePath="Value" FontSize="10" Height="30"/>
+                    <!--<TextBlock Text="Connect to pedal:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="200,10,0,0"  Grid.Row="2" Width="200" Foreground="Red" />-->
+                    <CheckBox x:Name="ConnectToPedal"
+      Width="30"
+      Height="30" IsChecked="False" IsEnabled="False" Content="" FontSize="8" Margin="5,0,0,0"/>
+                </StackPanel>
+                <styles:SHButtonPrimary x:Name="btn_pedal_connect" Click="ConnectToPedal_click" Width="160"  Height="28" Content="Connect to Pedal" HorizontalAlignment="Left" Margin="0,4,0,0"  />
+                <styles:SHButtonPrimary x:Name="btn_update" Click="UpdateSerialPortList_click" Width="160" Height="28" Content="Update serial port list" HorizontalAlignment="Left" Margin="0,4,0,0" />
+                <styles:SHButtonPrimary Click="SendConfigToPedal_click" Width="160" Height="28" Content="Send config to pedal &gt;&gt;" HorizontalAlignment="Left" Margin="0,4,0,0" Padding="0,6,0,6" />
+                <styles:SHButtonPrimary Click="ReadConfigFromPedal_click" Width="160" Height="28" Content="Read config from pedal &lt;&lt;" Margin="0,4,0,0" HorizontalAlignment="Left" Padding="0,6,0,6" />
+                <styles:SHButtonPrimary Click="OpenButton_Click" Width="160" Content="Open Config file" Height="28" Margin="0,4,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <styles:SHButtonPrimary Click="SaveButton_Click" Width="160" Content="Save Config to Local" Height="28" Margin="0,4,0,0" HorizontalAlignment="Left" />
+                <TextBox x:Name="TextBox2" TextWrapping="Wrap" Width="160" AutomationProperties.Name="TextBox2" Height="60" FontSize="10" Background="#FF252525" BorderBrush="#00CCCCCC" IsHitTestVisible="False" AllowDrop="True" Margin="0,4,0,0" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="checkbox_auto_connect" Content="Auto connect after initialized" Checked="checkbox_auto_connect_Checked" Unchecked="checkbox_auto_connect_Unchecked" IsChecked="False" FontSize="10" Width="225" Height="20" HorizontalAlignment="Left" Margin="0,4,0,0"/>
+                <CheckBox x:Name="checkbox_pedal_read" Content="Reading config from pedal when connected" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" IsChecked="False" FontSize="10" Width="225" Height="20" Margin="0,4,0,0" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="Vjoy_out_check" Content="vJoy Output" Height="20" Width="100" Checked="Vjoy_out_check_Checked" Unchecked="Vjoy_out_check_Unchecked" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,4,0,0" FontSize="10"/>
+                <StackPanel Height="15" Width="80" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="24,4,0,0">
+                    <Button x:Name="btn_plus"  Click="vjoy_plus_click" Content="+" Height="15" Width="15" BorderThickness="0,0,0,0" MinHeight="10" Padding="0,-0.5,0,0" VerticalContentAlignment="Top" FontWeight="Bold"/>
+                    <Label x:Name="Label_vjoy_order" Content="1" Height="15" Width="30" FontFamily="Yu Gothic UI" FontSize="10" VerticalContentAlignment="Center" Padding="0,0,0,0" HorizontalContentAlignment="Center"/>
+                    <Button x:Name="btn_minus"  Click="vjoy_minus_click" Content="-" Height="15" Width="15" BorderThickness="0,0,0,0" MinHeight="10" Padding="0,-3,0,0" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Yu Gothic UI" HorizontalContentAlignment="Center" FontSize="10"/>
+                </StackPanel>
+                <CheckBox x:Name="Debug_check"
                 Width="120"
-                Height="34" VerticalAlignment="Top" Content="Debug Mode" Foreground="White" Margin="4,1,0,0" Checked="Debug_checkbox_Checked" Unchecked="Debug_checkbox_Unchecked" IsChecked="False" FontSize="10"/>
-            <CheckBox x:Name="checkbox_pedal_read" Content="Reading config from pedal when connected" HorizontalAlignment="Left" Margin="4,104,0,0" Grid.Row="6" VerticalAlignment="Top" Checked="CheckBox_Checked" IsChecked="False" FontSize="10" Width="225" Grid.RowSpan="2"/>
-            <Canvas x:Name="canvas_horz_damping" Height="40" Width="400" Background="#00333333" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="384,70,0,0" Grid.ColumnSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
+                Height="20" Content="Debug Mode" Foreground="White" Checked="Debug_checkbox_Checked" Unchecked="Debug_checkbox_Unchecked" IsChecked="False" FontSize="10" Margin="0,4,0,0" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" Height="400" Margin="0,101,0,0" Grid.Row="3" VerticalAlignment="Top" Width="250" Grid.RowSpan="3">
+                <!-- PID sliders -->
 
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_damping" HorizontalAlignment="Left" 
-                    VerticalAlignment="Top" 
-                    Text="Damping:" 
-                    Width="60" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
+                <TextBlock x:Name="text_debug_flag" 
+                   Text="Debug flags 0:" 
+                   Width="120" 
+                   Foreground="White" Height="15" HorizontalAlignment="Left"/>
+                <TextBox x:Name="textBox_debug_Flag_0" Width="100" Height="30"  
+                PreviewTextInput="NumericTextBox_PreviewTextInput" TextChanged="NumericTextBox_TextChanged" Margin="0,3,0,0" HorizontalAlignment="Left"/>
+                <styles:SHButtonPrimary x:Name="button_pedal_position_reset" Click="ResetPedalPosition_click" Width="160" Height="28" Content="Reset pedal position" Margin="0,4,0,0" HorizontalAlignment="Left" />
+                <styles:SHButtonPrimary x:Name="button_pedal_restart" Click="RestartPedal_click" Width="160" Content="Restart pedal" Height="28" Margin="0,4,0,0" HorizontalAlignment="Left" />
+                <styles:SHButtonPrimary x:Name="btn_system_id" Click="StartSystemIdentification_click" Width="160" RenderTransformOrigin="0.522,1.216" Height="28" Content="System identification" Margin="0,4,0,0" HorizontalAlignment="Left" />
+                <styles:SHButtonPrimary x:Name="btn_pedal_disconnect" Click="DisconnectToPedal_click" Width="160"  Content="Disconnect from Pedal" Height="28" Margin="0,4,0,0" HorizontalAlignment="Left" />
+                <!-- PID sliders -->
 
+                <TextBlock x:Name="text_debug_PID_para" 
+                   Text="PID parameters:" 
+                   Width="120" 
+                   Foreground="White" HorizontalAlignment="Left" Height="18" Margin="0,3,0,0"/>
+                <TextBlock x:Name="text_debug_pgain" 
+                   Text="P-gain:" 
+                   Width="120" 
+                   Foreground="White" HorizontalAlignment="Left" Height="15" Margin="0,3,0,0"/>
+                <Slider x:Name="PID_tuning_P_gain_slider" 
+            Width="250" 
+            ValueChanged="PID_tuning_P_gain_changed" 
+            AutoToolTipPlacement="TopLeft" 
+            AutoToolTipPrecision="2"
+            Minimum="0"
+			Maximum="2"
+            TickPlacement="BottomRight"
+			TickFrequency="0.2" RenderTransformOrigin="0.508,0.525"
+            Value="0.3"
+            IsSnapToTickEnabled="False" 
+            SmallChange="0.05" Height="20" Margin="0,3,0,0"
+            />
+                <TextBlock x:Name="text_debug_igain" 
+                   Text="I-gain:" 
+                   Width="120" 
+                   Foreground="White" Height="15" HorizontalAlignment="Left" Margin="0,3,0,0"/>
+                <Slider x:Name="PID_tuning_I_gain_slider" 
+            Width="250" 
+            ValueChanged="PID_tuning_I_gain_changed" 
+            AutoToolTipPlacement="TopLeft" 
+            AutoToolTipPrecision="2"
+            Minimum="0"
+			Maximum="500"
+            TickPlacement="BottomRight"
+			TickFrequency="50" RenderTransformOrigin="0.508,0.525"
+            Value="50"
+            IsSnapToTickEnabled="False" Height="20" Margin="0,3,0,0"
+            />
+                <TextBlock x:Name="text_debug_dgain" 
+                   Text="D-gain:" 
+                   Width="120" 
+                   Foreground="White" Height="15" HorizontalAlignment="Left" Margin="0,3,0,0"/>
+                <Slider x:Name="PID_tuning_D_gain_slider" 
+            Width="250" 
+            ValueChanged="PID_tuning_D_gain_changed" 
+            AutoToolTipPlacement="TopLeft" 
+            AutoToolTipPrecision="3"
+            Minimum="0"
+			Maximum="0.01"
+            TickPlacement="BottomRight"
+			TickFrequency="0.001" RenderTransformOrigin="0.508,0.525"
+            Value="0"
+            IsSnapToTickEnabled="False" Height="25" Margin="0,3,0,0"
+            />
+                <TextBlock x:Name="text_debug_feedforward" 
+                    Text="Feedforward-gain:" 
+                    Width="252" 
+                    Foreground="White" Height="19"/>
+                <Slider x:Name="PID_tuning_Feedforward_gain_slider" 
+                    Width="250" 
+                    ValueChanged="PID_tuning_Feedforward_gain_changed" 
+                    AutoToolTipPlacement="TopLeft" 
+                    AutoToolTipPrecision="2"
+                    Minimum="0"
+                    Maximum="1"
+                    TickPlacement="BottomRight"
+                    TickFrequency="0.1" RenderTransformOrigin="0.496,0.827"
+                    Value="0.0"
+                    IsSnapToTickEnabled="False" 
+                    SmallChange="0.05" Height="52"
+            />
+            </StackPanel>
+            <TabControl Grid.Column="1" HorizontalAlignment="Left" Height="250" Grid.RowSpan="2" Grid.Row="2" VerticalAlignment="Top" Width="540" Padding="0,0,0,0" BorderThickness="0,0,0,0" Background="#00252525" Foreground="Transparent">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <!--The four values of CornerRadius represent the four corners of the TabItem.-->
+                                    <Border Name="Border" BorderThickness="0,0,0,0" BorderBrush="Gainsboro" CornerRadius="5,5,5,5" Margin="0,0,2,0">
+                                        <ContentPresenter x:Name="ContentSite"  
+                                        VerticalAlignment="Center"  
+                                        HorizontalAlignment="Left"  
+                                        ContentSource="Header"  
+                                        Margin="0,0"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="#7F4E4E4E" />
+                                            <Setter Property="TextElement.Foreground" Value="#FFFFFFFF" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="#334E4E4E" />
+                                            <Setter Property="TextElement.Foreground" Value="#7FFFFFFF" />
+                                        </Trigger>
+                                        <MultiTrigger>
+                                            <MultiTrigger.Conditions>
+                                                <Condition Property="IsMouseOver" SourceName="Border" Value="True"/>
+                                                <Condition Property="IsSelected" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter TargetName="Border" Property="Background" Value="#4C4E4E4E" />
+                                        </MultiTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
 
+                <TabItem Width="100" Height="30" Padding="0,0,0,0">
+                    <TabItem.Header>
+                        <Border  Width="100" Height="30" Margin="0,0,0,0" >
+                            <Label Content="Pedal"  FontFamily="Arial Black" FontSize="12" Height="30" Width="100" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                        </Border>
+                    </TabItem.Header>
+                    <Border Background="#7F4E4E4E" CornerRadius="5,5,5,5" Height="220" BorderThickness="0,2,0,0" >
+                        <StackPanel HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="540">
+                            <Label Content="Pedal Setting" Height="15" Width="150" Padding="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                            <StackPanel Height="40" Width="540" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <CheckBox x:Name="dynamic_PID_checkbox" Width="150" Height="34" Content="Dynamic PID control" Foreground="White" Checked="PID_type_checkbox_Checked" Unchecked="PID_type_checkbox_Unchecked" IsChecked="False" FontSize="10" HorizontalAlignment="Left" Margin="70,0,0,0" Background="#7F4E4E4E"/>
+                                <CheckBox x:Name="JoystickOutput_check" Width="156" Height="34" Content="Joystick output from travel" Foreground="White" Checked="JoystickOutput_checked" Unchecked="JoystickOutput_unchecked" IsChecked="False" FontSize="10" HorizontalAlignment="Left" Background="#7F4E4E4E"/>
+                                <CheckBox x:Name="InvertLoadcellReading_check" Content="Reverse loadcell reading" Foreground="White" Checked="InvertLoadcellReading_checked" Unchecked="InvertLoadcellReading_unchecked" IsChecked="False" FontSize="10" Background="#7F4E4E4E" Height="34" Width="156"/>
+                            </StackPanel>
+                            <Canvas x:Name="canvas_horz_damping" Height="40" Width="400" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
 
-                <Line x:Name="Line_H_damping"
-                    X1="5" Y1="20"
-                    X2="405" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_damping" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-            <Canvas x:Name="canvas_horz_ABS" Height="40" Width="400" Background="#00333333" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="384,111,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_ABS" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Width="100" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform><Run Text="ABS"/><Run Language="zh-tw" Text="/TC"/><Run Text=" Amplitude"/><Run Text=":"/></TextBlock>
-
-
-
-                <Line x:Name="Line_H_ABS"
-                    X1="5" Y1="20"
-                    X2="405" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_ABS" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-
-            <Canvas x:Name="canvas_horz_ABS_freq" Height="40" Width="400" Background="#00333333" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="384,29,0,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_ABS_freq" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Width="120" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Text="ABS/TC Frequency :">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform></TextBlock>
-
-
-
-                <Line x:Name="Line_H_ABS_freq"
-                    X1="5" Y1="20"
-                    X2="405" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_ABS_freq" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-            <Canvas x:Name="canvas_horz_max_game" Height="40" Width="100" Background="#00333333" HorizontalAlignment="Left" Grid.Row="7" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="258,29,0,0" Grid.RowSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_max_game" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Width="80" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform><Run Language="zh-tw" Text="Max Game Output: "/></TextBlock>
-
-
-
-                <Line x:Name="Line_H_max_game"
-                    X1="5" Y1="20"
-                    X2="105" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_max_game" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-
-            <Canvas x:Name="canvas_horz_KF" Height="40" Width="100" Background="#00333333" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="258,70,0,0" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_KF" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Width="80" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20" Text="KF:">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform></TextBlock>
-
-
-
-                <Line x:Name="Line_H_KF"
-                    X1="5" Y1="20"
-                    X2="105" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_KF" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
-
-            </Canvas>
-            <Canvas x:Name="canvas_horz_LC_rating" Height="40" Width="100" Background="#00333333" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="258,111,0,0" Grid.RowSpan="2" >
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="1" ScaleY="1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-
-                </Canvas.RenderTransform>
-                <TextBlock x:Name="text_LC_rating" HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
-                    Width="100" 
-                    Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20" Text="LC Rate:">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="0"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform></TextBlock>
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_damping" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Damping:" Width="60" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="2">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                                <TextBlock x:Name="text_damping_text" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Damping" Width="60" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="170">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
 
 
 
-                <Line x:Name="Line_H_LC_rating"
-                    X1="5" Y1="20"
-                    X2="105" Y2="20"
-                    Stroke="#7F87CEFA"
-                    StrokeThickness="2" />
-                <Rectangle x:Name="rect_LC_rating" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <Line x:Name="Line_H_damping"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_damping" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
 
-            </Canvas>
-            <CheckBox x:Name="dynamic_PID_checkbox" HorizontalAlignment="Left" Grid.Row="6"
-                Width="120"
-                Height="34" VerticalAlignment="Top" Content="Dynamic PID control" Foreground="White" Margin="4,70,0,0" Checked="PID_type_checkbox_Checked" Unchecked="PID_type_checkbox_Unchecked" IsChecked="False" FontSize="10"/>
+                            </Canvas>
+                            <StackPanel Height="40" Width="540" HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal">
+                                <Canvas x:Name="canvas_horz_KF" Height="40" Width="100" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,0,0,0" >
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+
+                                    </Canvas.RenderTransform>
+                                    <TextBlock x:Name="text_KF" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="1" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20" Text="KF:">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform></TextBlock>
+                                    <TextBlock x:Name="text_KF_text" HorizontalAlignment="Left" VerticalAlignment="Center" Width="60" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="10" Text="KF" Margin="20,0,0,0" Canvas.Left="0">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform></TextBlock>
+
+
+                                    <Line x:Name="Line_H_KF"
+                                        X1="5" Y1="20"
+                                        X2="105" Y2="20"
+                                        Stroke="#7F87CEFA"
+                                        StrokeThickness="2" />
+                                    <Rectangle x:Name="rect_KF" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+
+                                </Canvas>
+                                <Canvas x:Name="canvas_horz_LC_rating" Height="40" Width="100" Background="#00333333" RenderTransformOrigin="0.5,0.5" Margin="50,0,0,0" >
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+
+                                    </Canvas.RenderTransform>
+                                    <TextBlock x:Name="text_LC_rating" HorizontalAlignment="Center" VerticalAlignment="Top" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="3" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20" Text="LC Rate:">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform></TextBlock>
+
+
+
+                                    <Line x:Name="Line_H_LC_rating"
+                                        X1="5" Y1="20"
+                                        X2="105" Y2="20"
+                                        Stroke="#7F87CEFA"
+                                        StrokeThickness="2" />
+                                    <Rectangle x:Name="rect_LC_rating" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                    <TextBlock x:Name="text_LC_rating_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="10" Text="LC Rate" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform></TextBlock>
+
+                                </Canvas>
+                                <Canvas x:Name="canvas_horz_max_game" Height="40" Width="100" Background="#00333333" RenderTransformOrigin="0.5,0.5" Margin="50,0,0,0" >
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+
+                                    </Canvas.RenderTransform>
+                                    <TextBlock x:Name="text_max_game" HorizontalAlignment="Left" VerticalAlignment="Center" Width="80" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="5" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="20">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform><Run Language="zh-tw" Text="Max Game Output: "/></TextBlock>
+
+
+
+                                    <Line x:Name="Line_H_max_game"
+                                        X1="5" Y1="20"
+                                        X2="105" Y2="20"
+                                        Stroke="#7F87CEFA"
+                                        StrokeThickness="2" />
+                                    <Rectangle x:Name="rect_max_game" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                    <TextBlock x:Name="text_max_game_text"  Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="10" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0">
+                                        <TextBlock.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </TextBlock.RenderTransform><Run Language="zh-tw" Text="Max Game Output"/></TextBlock>
+
+                                </Canvas>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
+                </TabItem>
+                <TabItem Width="100" Height="30" Padding="0,0,0,0">
+                    <TabItem.Header>
+                        <Border  Width="100" Height="30" Margin="0,0,0,0" >
+                            <Label Content="ABS/TC"  FontFamily="Arial Black" FontSize="12" Height="30" Width="100" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                        </Border>
+                    </TabItem.Header>
+                    <Border Background="#7F4E4E4E" CornerRadius="5,5,5,5" Height="220" BorderThickness="0,2,0,0" >
+                        <StackPanel HorizontalAlignment="Left" Height="220" VerticalAlignment="Top" Width="540">
+                            <Label Content="ABS/TC Effect Setting" Height="15" Width="150" Padding="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                            <StackPanel Height="40" Width="540" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <CheckBox x:Name="checkbox_enable_ABS" Content="ABS Effect Enabled" Checked="checkbox_enable_ABS_Checked" Unchecked="checkbox_enable_ABS_Unchecked" IsChecked="False" FontSize="10" Width="130" Height="20" HorizontalAlignment="Left" Margin="70,0,0,0" Background="#7F4E4E4E"/>
+                                <Label Content="Effect Profile:" Height="20" Width="65" FontSize="10" Padding="0,0,0,0" VerticalContentAlignment="Center"/>
+                                <ComboBox x:Name="AbsPattern" SelectionChanged="AbsPatternChanged"   Width="80" Height="10" FontSize="10" SelectedIndex="0" Margin="5,0,0,0">
+                                    <ComboBoxItem Content="Sinewave"/>
+                                    <ComboBoxItem Content="Sawtooth"/>
+                                </ComboBox>
+                                <Button Content="Test ABS/TC" Click="TestAbs_click" Height="20" Background="#FF050550" FontWeight="Bold" FontSize="9" Width="80" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                                <CheckBox Width="30" x:Name="TestAbs_check" IsEnabled="False" Height="20" FontSize="8" Foreground="White" Content="" HorizontalAlignment="Left"/>
+
+
+                            </StackPanel>
+                            <StackPanel Height="40" Width="540" Orientation="Horizontal">
+                                <Label Content="Effect Apply By:" Height="25" Width="85" FontSize="10" Margin="70,0,0,0" FontFamily="Arial" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                                <ComboBox x:Name="EffectAppliedOnForceOrTravel_combobox" SelectionChanged="EffectAppliedOnForceOrTravel_combobox_changed" Width="80" Height="10" FontSize="10" SelectedIndex="0">
+                                    <ComboBoxItem Content="Force"/>
+                                    <ComboBoxItem Content="Travel"/>
+                                </ComboBox>
+                                <CheckBox x:Name="Simulate_ABS_check" Width="210" Height="34" Content="Simulate ABS for non-supported game" Foreground="White" Checked="Simulate_ABS_check_Checked" Unchecked="Simulate_ABS_check_Unchecked" IsChecked="False" FontSize="10" Background="#7F4E4E4E" Margin="20,0,0,0"/>
+                            </StackPanel>
+                            <Canvas x:Name="canvas_horz_ABS" Height="40" Width="400" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_ABS" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="4">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform><Run Text="ABS"/><Run Language="zh-tw" Text="/TC"/><Run Text=" Amplitude"/><Run Text=":"/></TextBlock>
+
+
+
+                                <Line x:Name="Line_H_ABS"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_ABS" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_ABS_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="150" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform><Run Text="ABS"/><Run Text="/TC"/><Run Text=" Amplitude"/></TextBlock>
+
+                            </Canvas>
+                            <Canvas x:Name="canvas_horz_ABS_freq" Height="40" Width="400" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_ABS_freq" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Text="ABS/TC Frequency :">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+
+
+                                <Line x:Name="Line_H_ABS_freq"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_ABS_freq" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_ABS_freq_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Text="ABS/TC Frequency" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="150" Height="10">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+                            </Canvas>
+
+
+                        </StackPanel>
+                    </Border>
+                </TabItem>
+                <TabItem Width="100" Height="30" Padding="0,0,0,0">
+                    <TabItem.Header>
+                        <Border  Width="100" Height="30" Margin="0,0,0,0" >
+                            <Label Content="Engine RPM"  FontFamily="Arial Black" FontSize="12" Height="30" Width="100" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                        </Border>
+                    </TabItem.Header>
+                    <Border Background="#7F4E4E4E" CornerRadius="5,5,5,5" Height="220" BorderThickness="0,2,0,0" >
+                        <StackPanel HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="540">
+                            <Label Content="Engine RPM Effect Setting" Height="15" Width="200" Padding="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Arial Black" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                            <StackPanel Height="40" Width="540" Orientation="Horizontal" HorizontalAlignment="Left">
+                                <CheckBox x:Name="checkbox_enable_RPM" Content="Engine RPM Effect Enabled" Checked="checkbox_enable_RPM_Checked" Unchecked="checkbox_enable_RPM_Unchecked" IsChecked="False" FontSize="10" Width="160" Height="20" Margin="70,0,0,0" Background="#7F4E4E4E"/>
+                            </StackPanel>
+                            <Canvas x:Name="canvas_horz_RPM_AMP" Height="40" Width="410" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_RPM_AMP" HorizontalAlignment="Center" VerticalAlignment="Top" Width="80" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="3" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="10" Text="RPM AMPt: ">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+
+
+                                <Line x:Name="Line_H_RPM_AMP"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_RPM_AMP" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_RPM_AMP_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="28" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Height="10" Text="RPM AMP " HorizontalAlignment="Left" VerticalAlignment="Top">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+                            </Canvas>
+                            <Canvas x:Name="canvas_horz_RPM_freq" Height="40" Width="410" Background="#00333333" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Margin="65,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+
+
+                                <TextBlock x:Name="text_RPM_freq_min" HorizontalAlignment="Left" VerticalAlignment="Top" Text="RPM Min Freq:" Width="60" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="1" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="-20" Height="20">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                                <TextBlock x:Name="text_RPM_freq_max" HorizontalAlignment="Left" VerticalAlignment="Top" Text="RPM max freq.:" Width="60" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="372" Height="20">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+
+
+
+                                <Line x:Name="Line_H_RPM_freq"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+
+                                <Rectangle x:Name="rect_RPM_min" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="0" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H_RPM" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <Rectangle x:Name="rect_RPM_max" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="400" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_H_RPM" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_RPM_freq_text" Text="RPM Effect Frequency" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="150.2" Height="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+
+                            </Canvas>
+                        </StackPanel>
+                    </Border>
+                </TabItem>
+
+                <TabItem Width="100" Height="30" Padding="0,0,0,0">
+                    <TabItem.Header>
+                        <Border  Width="100" Height="30" Margin="0,0,0,0" >
+                            <Label Content="Bite Point"  FontFamily="Arial Black" FontSize="12" Height="30" Width="100" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                        </Border>
+                    </TabItem.Header>
+                    <Border Background="#7F4E4E4E" CornerRadius="5,5,5,5" Height="220" BorderThickness="0,2,0,0" >
+                        <StackPanel HorizontalAlignment="Left" Height="160" VerticalAlignment="Top" Width="540" Margin="0,-1,0,0">
+                            <Label Content="Bite Point Vibration Setting" Padding="0,0,0,0" VerticalContentAlignment="Center" FontFamily="Arial Black" Width="200" Height="15" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                            <StackPanel Height="40" Width="540" Orientation="Horizontal">
+                                <CheckBox x:Name="checkbox_enable_bite_point" Content="Bite point Enabled" Checked="checkbox_enable_bite_point_Checked" Unchecked="checkbox_enable_bite_point_Unchecked" IsChecked="False" FontSize="10" Background="#7F4E4E4E" Height="20" Width="160" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="70,0,0,0"/>
+                            </StackPanel>
+                            <Canvas x:Name="canvas_horz_bite_amp" Background="#00333333" RenderTransformOrigin="0.5,0.5" Height="40" Width="400" HorizontalAlignment="Left" Margin="70,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_bite_amp" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="4">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform><Run Text="ABS"/><Run Language="zh-tw" Text="/TC"/><Run Text=" Amplitude"/><Run Text=":"/></TextBlock>
+
+
+
+                                <Line x:Name="Line_H_bite_amp"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_bite_amp" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_bite_amp_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="30" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Canvas.Left="150" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Bite Point Amplitude">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+                            </Canvas>
+                            <Canvas x:Name="canvas_horz_bite_freq" Background="#00333333" RenderTransformOrigin="0.5,0.5" Height="40" Width="400" HorizontalAlignment="Left" Margin="70,0,0,0" >
+                                <Canvas.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+
+                                </Canvas.RenderTransform>
+                                <TextBlock x:Name="text_bite_freq" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="6" FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Text="ABS/TC Frequency :">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+
+
+                                <Line x:Name="Line_H_bite_freq"
+                                    X1="5" Y1="20"
+                                    X2="405" Y2="20"
+                                    Stroke="#7F87CEFA"
+                                    StrokeThickness="2" />
+                                <Rectangle x:Name="rect_bite_freq" Width="10" Height="10" Fill="LightSkyBlue" Canvas.Left="20" Canvas.Top="15" MouseLeftButtonDown="Rectangle_MouseLeftButtonDown" MouseMove="Rectangle_MouseMove_sigle_slider_H" MouseLeftButtonUp="Rectangle_MouseLeftButtonUp"/>
+                                <TextBlock x:Name="text_bite_freq_text" Width="100" Foreground="LightSkyBlue" RenderTransformOrigin="0.5,0.5" Canvas.Top="26                                    " FontSize="8" FontFamily="Arial Black" TextAlignment="Center" Text="Bite Point Frequency" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="150" Height="10">
+                                    <TextBlock.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="0"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </TextBlock.RenderTransform></TextBlock>
+
+                            </Canvas>
+
+                        </StackPanel>
+                    </Border>
+                </TabItem>
+
+                <!--<TabItem Width="100" Height="30" Padding="0,0,0,0">
+                    <TabItem.Header>
+                        <Border  Width="100" Height="30" Margin="0,0,0,0" >
+                            <Label Content="G-Force"  FontFamily="Arial Black" FontSize="12" Height="30" Width="100" Padding="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" UseLayoutRounding="True"  />
+                        </Border>
+                    </TabItem.Header>
+                    <Border Background="#7F4E4E4E" CornerRadius="5,5,5,5" BorderThickness="0,2,0,0" >
+                        <Label>not yet ready
+                        </Label>
+                    </Border>
+                </TabItem>-->
+
+
+            </TabControl>
+            
 
 
 
