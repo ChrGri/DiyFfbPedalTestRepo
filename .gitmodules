@@ -1,0 +1,30 @@
+[submodule "Arduino/libs/FastAccelStepper"]
+	path = Arduino/libs/FastAccelStepper
+	url = https://github.com/gin66/FastAccelStepper.git
+[submodule "Arduino/libs/Kalman"]
+	path = Arduino/libs/Kalman
+	url = https://github.com/rfetick/Kalman.git
+[submodule "Arduino/libs/BasicLinearAlgebra"]
+	path = Arduino/libs/BasicLinearAlgebra
+	url = https://github.com/tomstewart89/BasicLinearAlgebra.git
+[submodule "Arduino/libs/Joystick_ESP32S2"]
+	path = Arduino/libs/Joystick_ESP32S2
+	url = https://github.com/schnoog/Joystick_ESP32S2.git
+[submodule "Arduino/libs/Arduino-Interpolation"]
+	path = Arduino/libs/Arduino-Interpolation
+	url = https://github.com/luisllamasbinaburo/Arduino-Interpolation.git
+[submodule "Arduino/libs/ESP32-BLE-Gamepad"]
+	path = Arduino/libs/ESP32-BLE-Gamepad
+	url = https://github.com/lemmingDev/ESP32-BLE-Gamepad.git
+[submodule "Arduino/libs/NimBLE-Arduino"]
+	path = Arduino/libs/NimBLE-Arduino
+	url = https://github.com/h2zero/NimBLE-Arduino.git
+[submodule "Arduino/libs/Arduino-Filters"]
+	path = Arduino/libs/Arduino-Filters
+	url = https://github.com/tttapa/Arduino-Filters.git
+[submodule "Arduino/libs/QuickPID"]
+	path = Arduino/libs/QuickPID
+	url = https://github.com/Dlloydev/QuickPID.git
+[submodule "Arduino/libs/ADS1256"]
+	path = Arduino/libs/ADS1256
+	url = https://github.com/ChrGri/ADS1255-ADS1256.git
