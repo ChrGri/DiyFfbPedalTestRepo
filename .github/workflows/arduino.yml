@@ -67,6 +67,7 @@ jobs:
       - name: List Arduino libs
         run: |
           ls ${{ github.workspace }}/Arduino/libs/
+          ls ./Arduino/libs/
 
           
       - name: List files in Kalman lib
